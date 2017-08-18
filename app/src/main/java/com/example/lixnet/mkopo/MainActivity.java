@@ -279,7 +279,34 @@ public class MainActivity extends Activity {
                     //s.setAmount(data[6]);
                     s.setType("Withdraw");
                     //s.setBalance(data[22]);
-                }else{}
+                }else if(body.contains("Give")){
+                    s.setTransactionID(data[0]);
+                    s.setTransactiontype("MPESA");
+
+                    //s.setName(data[6] + " " + data[7]);
+                    //s.setPhone(data[8]);
+                    s.setTimestamp(data[3] + " - " + data[5]+data[6]);
+
+                    for(int j= 0; j<data.length;j++) {
+                        if (data[j].startsWith("Ksh")) {
+                            s.setAmount(data[j]);
+                            break;
+
+                        }
+
+                    }
+                    //Toast.makeText(MainActivity.this,j.toString(),Toast.LENGTH_SHORT).show();
+                    for(int k= 0; k<data.length;k++) {
+                        if (data[k].startsWith("balance")) {
+                            s.setBalance(data[k+2]);
+                            break;
+                        }
+                    }
+
+                    //s.setAmount(data[6]);
+                    s.setType("Deposit");
+                    //s.setBalance(data[22]);
+                }
 
                 smsList.add(s);
                 adapter = new CustomListAdapter(this, smsList);
